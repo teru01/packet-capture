@@ -23,12 +23,12 @@ fn main() {
         eprintln!("Please specify target interface name");
         std::process::exit(1);
     }
-    let interface_name = env::args().nth(1).unwrap();
+    let interface_name = &args[1];
 
     let interfaces = datalink::interfaces();
     let interface = interfaces
         .into_iter()
-        .filter(|iface| iface.name == interface_name)
+        .filter(|iface| iface.name == *interface_name)
         .next()
         .expect("Failed to get interface");
 
@@ -77,7 +77,7 @@ fn print_endpoints(l3: &GettableEndPoints, l4: &GettableEndPoints, proto: &str) 
     for i in 0..len {
         print!("{:<02X} ", payload[i]);
         if i%WIDTH == WIDTH-1 || i == len-1 {
-            for j in 0..WIDTH-1-(i % (WIDTH)) {
+            for _j in 0..WIDTH-1-(i % (WIDTH)) {
                 print!("   ");
             }
             print!("| ");
