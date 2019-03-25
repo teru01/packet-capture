@@ -15,6 +15,8 @@ use std::env;
 mod packets;
 use packets::GettableEndPoints;
 
+const WIDTH:usize = 20;
+
 fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
@@ -70,13 +72,23 @@ fn print_endpoints(l3: &GettableEndPoints, l4: &GettableEndPoints, proto: &str) 
         l4.get_destination()
     );
     let payload = l4.get_payload();
-    for (i, c) in payload.iter().enumerate() {
-        if i % 20 != 0 {
-            print!(" ");
-        }
-        print!("{:<02X}", c);
-        if (i+1) % 20 == 0 {
-            print!("|\n");
+    let len = payload.len();
+
+    for i in 0..len {
+        print!("{:<02X} ", payload[i]);
+        if i%WIDTH == WIDTH-1 || i == len-1 {
+            for j in 0..WIDTH-1-(i % (WIDTH)) {
+                print!("   ");
+            }
+            print!("| ");
+            for j in i-i%WIDTH..i+1 {
+                if payload[j].is_ascii_alphabetic() {
+                    print!("{}", payload[j] as char);
+                } else {
+                    print!(".");
+                }
+            }
+            print!("\n");
         }
     }
     print!("\n");
