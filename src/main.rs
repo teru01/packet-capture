@@ -91,8 +91,8 @@ fn print_endpoints(l3: &GettableEndPoints, l4: &GettableEndPoints, proto: &str) 
             print!("\n");
         }
     }
+    println!("{}", "=".repeat(WIDTH * 3));
     print!("\n");
-    println!("{}", "=".repeat(59));
 }
 
 fn ipv4_handler(ethernet: &EthernetPacket) {
