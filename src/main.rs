@@ -16,6 +16,11 @@ mod packets;
 use packets::GettableEndPoints;
 
 fn main() {
+    let args: Vec<String> = env::args().collect();
+    if args.len() != 2 {
+        eprintln!("Please specify target interface name");
+        std::process::exit(1);
+    }
     let interface_name = env::args().nth(1).unwrap();
 
     let interfaces = datalink::interfaces();
@@ -57,13 +62,25 @@ fn main() {
 }
 
 fn print_endpoints(l3: &GettableEndPoints, l4: &GettableEndPoints, proto: &str) {
-    println!("Caught a {} packet from {}:{} to {}:{}",
+    println!("Captured a {} packet from {}|{} to {}|{}\n",
         proto,
         l3.get_source(),
         l4.get_source(),
         l3.get_destination(),
         l4.get_destination()
     );
+    let payload = l4.get_payload();
+    for (i, c) in payload.iter().enumerate() {
+        if i % 20 != 0 {
+            print!(" ");
+        }
+        print!("{:<02X}", c);
+        if (i+1) % 20 == 0 {
+            print!("|\n");
+        }
+    }
+    print!("\n");
+    println!("{}", "=".repeat(59));
 }
 
 fn ipv4_handler(ethernet: &EthernetPacket) {
