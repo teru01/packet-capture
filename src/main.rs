@@ -63,7 +63,7 @@ fn main() {
     }
 }
 
-fn print_endpoints(l3: &GettableEndPoints, l4: &GettableEndPoints, proto: &str) {
+fn print_packet_info(l3: &GettableEndPoints, l4: &GettableEndPoints, proto: &str) {
     println!("Captured a {} packet from {}|{} to {}|{}\n",
         proto,
         l3.get_source(),
@@ -130,13 +130,13 @@ fn ipv6_handler(ethernet: &EthernetPacket) {
 fn tcp_handler(packet: &GettableEndPoints) {
     let tcp = TcpPacket::new(packet.get_payload());
     if let Some(tcp) = tcp {
-        print_endpoints(packet, &tcp, "TCP");
+        print_packet_info(packet, &tcp, "TCP");
     }
 }
 
 fn udp_handler(packet: &GettableEndPoints) {
     let udp = UdpPacket::new(packet.get_payload());
     if let Some(udp) = udp {
-        print_endpoints(packet, &udp, "UDP");
+        print_packet_info(packet, &udp, "UDP");
     }
 }
