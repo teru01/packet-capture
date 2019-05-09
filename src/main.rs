@@ -1,5 +1,3 @@
-extern crate pnet;
-
 use pnet::datalink;
 use pnet::datalink::Channel::Ethernet;
 use pnet::packet::ethernet::{EtherTypes, EthernetPacket};
