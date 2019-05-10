@@ -1,5 +1,5 @@
 [package]
-name = "pnet-example"
+name = "packet-capture"
 version = "0.1.0"
 authors = ["teruya <abas.trace.on@gmail.com>"]
 edition = "2018"
