@@ -54,7 +54,7 @@ fn main() {
                         ipv6_handler(&frame);
                     }
                     _ => {
-                        info!("Not a ipv4 or ipv6");
+                        info!("Not an IPv4 or IPv6");
                     }
                 }
             }
@@ -78,7 +78,7 @@ fn ipv4_handler(ethernet: &EthernetPacket) {
                 udp_handler(&packet);
             }
             _ => {
-                info!("Not a tcp or a udp packet");
+                info!("Not a TCP or UDP packet");
             }
         }
     }
@@ -97,7 +97,7 @@ fn ipv6_handler(ethernet: &EthernetPacket) {
                 udp_handler(&packet);
             }
             _ => {
-                info!("Not a tcp or a udp packet");
+                info!("Not a TCP or UDP packet");
             }
         }
     }
