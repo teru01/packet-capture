@@ -34,7 +34,7 @@ fn main() {
         .find(|iface| iface.name == *interface_name)
         .expect("Failed to get interface");
 
-    // データリンクのチャンネルを取得
+    /* [1]: データリンクのチャンネルを取得 */
     let (_tx, mut rx) = match datalink::channel(&interface, Default::default()) {
         Ok(Ethernet(tx, rx)) => (tx, rx),
         Ok(_) => panic!("Unhandled channel type"),
