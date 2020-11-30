@@ -5,6 +5,6 @@ authors = ["teruya <abas.trace.on@gmail.com>"]
 edition = "2018"
 
 [dependencies]
-pnet = "0.22.0"
+pnet = "0.26.0"
 log = "0.4"
 env_logger = "0.6.1"
